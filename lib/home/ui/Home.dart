@@ -30,10 +30,6 @@ class HomePageState extends State<HomePage>{
   final data;
   var temp;
   HomePageState(this.data);
-  initState() {
-    super.initState();
-    temp = (data['currently']['temperature']-32)*(5/9);
-  }
   @override
   Widget build(BuildContext context){
     final double statusBarHeight = MediaQuery
@@ -48,7 +44,7 @@ class HomePageState extends State<HomePage>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new IconHolder(data['currently']['icon']),
-            new WeatherText(temp.round().toString()),
+            new WeatherText(data['currently']['temperature'].round().toString()),
           ],
         ),
       ),

@@ -50,12 +50,14 @@ class LoadingPageState extends State<LoadingPage> with SingleTickerProviderState
       },
     );
     var data = JSON.decode(response.body);
+    data['currently']['temperature'] = (data['currently']['temperature']-32)*(5/9);
+    controller.dispose();
+    // // super.dispose();
     print(data);
     await Navigator.pushReplacement(context, new MaterialPageRoute(
       builder: (BuildContext context) => new HomePage(data)
     ));
   }
-
   void animationStarter() {
     controller = new AnimationController(
     duration: const Duration(milliseconds: 10000), vsync: this);
@@ -67,6 +69,7 @@ class LoadingPageState extends State<LoadingPage> with SingleTickerProviderState
       });
     controller.repeat();
   }
+
   @override
   Widget build(BuildContext context) {
   final double statusBarHeight = MediaQuery
